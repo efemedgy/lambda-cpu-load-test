@@ -1,0 +1,17 @@
+service: CPULoadTest
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: us-west-2
+  memorySize: 512
+  timeout: 6
+  profile: staging
+
+package:
+ include:
+   - sqrt/sqrt
+
+functions:
+  sqrt:
+    handler: sqrt/sqrt
