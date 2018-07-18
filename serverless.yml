@@ -4,14 +4,21 @@ provider:
   name: aws
   runtime: go1.x
   region: us-west-2
-  memorySize: 512
+  memorySize: ${opt:mSize}
   timeout: 6
   profile: staging
 
 package:
  include:
-   - sqrt/sqrt
+   - cpuload
 
 functions:
   sqrt:
-    handler: sqrt/sqrt
+   name: CPULoadTest-dev-sqrt-${opt:mSize}
+   handler: sqrt/sqrt
+  sleep:
+    name: CPULoadTest-dev-sleep-${opt:mSize}
+    handler: sleep/sleep
+  goroutine:
+    name: CPULoadTest-dev-goroutine-${opt:mSize}
+    handler: goroutine/goroutine

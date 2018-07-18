@@ -13,16 +13,15 @@ import (
 )
 
 func main() {
-	fName := os.Args[1]
-	mSize := os.Args[2]
+	fName := os.Args[1] + "-" + os.Args[2]
 
 	// Create a csv file and add headers
-	file, err := os.Create("../results/" + fName + mSize + ".csv")
+	file, err := os.Create("./results/" + fName + ".csv")
 	checkError("Cannot create file", err)
 	defer file.Close()
 	file.WriteString("dUtime,dStime,dUser,dSystem,dIdle,dNice,dIowait,dIrq,dSoftirq,dSteal,dGuest,dGuest_nice,sys_usage,proc_usage\n")
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 100; i++ {
 		result := invokeLambda(fName)
 		parseResultsAndWriteToCsv(file, result)
 	}
